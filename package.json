@@ -7,6 +7,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "add": "^2.0.6",
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "jwt-decode": "^2.2.0",
@@ -18,11 +19,13 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
     "react-scripts": "1.1.1",
+    "react-spinners": "^0.2.6",
     "reactstrap": "^5.0.0-beta.2",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "yarn": "^1.5.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -4,9 +4,6 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardLink,
-  CardTitle,
-  Col
 } from 'reactstrap';
 
 const Photo = ({
@@ -14,8 +11,8 @@ const Photo = ({
 }) => {
   return (
     <div className="col-md-3 col-6 my-2">
-      <Card className="h-100">
-        <img width="100%" src={photo.thumbnailUrl} alt="Card image cap" />
+      <Card className="h-100" outline color="danger">
+        <CardImg top width="100%" src={photo.thumbnailUrl} alt="Card image cap" />
         <CardBody>
           <CardText>{photo.title}</CardText>
         </CardBody>
