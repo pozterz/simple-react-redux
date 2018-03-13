@@ -1,10 +1,16 @@
 import { combineReducers }  from 'redux';
-import github             from '../actions/github';
+import { routerReducer }    from 'react-router-redux';
+import gallery             from '../actions/gallery';
+import views             from '../actions/views';
+import userAuth             from '../actions/userAuth';
 
 export const reducers = {
-  repos: github
+  gallery,
+  userAuth,
+  views
 };
 
 export default combineReducers({
   ...reducers,
+  routing: routerReducer
 });
