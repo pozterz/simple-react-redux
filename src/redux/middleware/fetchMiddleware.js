@@ -1,4 +1,5 @@
 import axios  from 'axios';
+import auth from '../../services/auth'
 
 export const FETCH      = 'FETCH';
 
@@ -26,6 +27,15 @@ const fetchMiddleware = store => next => action => {
     } = action.fetch;
 
     store.dispatch({ type: request });
+
+    axios.create({
+      baseURL: url
+    })
+
+    api.interceptors.request.use(config => {
+      config.headers['Authorization'] = 'Bearer ' + auth.getToken()
+      return config
+    })
     
     return axios.request({
       method,

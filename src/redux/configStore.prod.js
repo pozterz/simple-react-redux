@@ -7,6 +7,7 @@ import thunkMiddleware          from 'redux-thunk';
 import reducer                  from './reducer/reducers';
 import createHistory            from 'history/createBrowserHistory';
 import fetchMiddleware          from './middleware/fetchMiddleware';
+import { composeWithDevTools }  from 'redux-devtools-extension';
 
 export const history = createHistory();
 
