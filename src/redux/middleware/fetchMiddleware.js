@@ -1,4 +1,5 @@
 import axios  from 'axios';
+import { api } from '../../services/api'
 import auth from '../../services/auth'
 
 export const FETCH      = 'FETCH';
