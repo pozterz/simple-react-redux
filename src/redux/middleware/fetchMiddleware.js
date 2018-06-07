@@ -1,5 +1,4 @@
 import axios  from 'axios';
-import { api } from '../../services/api'
 import auth from '../../services/auth'
 
 export const FETCH      = 'FETCH';
@@ -29,7 +28,7 @@ const fetchMiddleware = store => next => action => {
 
     store.dispatch({ type: request });
 
-    axios.create({
+    let api = axios.create({
       baseURL: url
     })
 
