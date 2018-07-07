@@ -1,25 +1,24 @@
-import { getLocationOrigin }    from './getLocationOrigin';
+import { getLocationOrigin } from './getLocationOrigin'
 
-export const api = (method = 'get', endpoint = '/', body = {}, actionTypes) => {
-  return dispatch => {
-    const fetchType       = 'FETCH';
-    
-    const url     = `${getLocationOrigin()}/${endpoint}`;
-    const options = {};
-    const data = body;
+export const api = (method = 'get', endpoint = '/', body = {}, actions) => {
+	return dispatch => {
+		const url = `${getLocationOrigin()}/${endpoint}`
+    const options = {}
+    const headers = {}
+		const data = body
 
-    return Promise.resolve(
-      dispatch({
-        type: 'FETCH_MIDDLEWARE',
-        fetch: {
-          type: fetchType,
-          actionTypes,
-          url,
+		return Promise.resolve(
+			dispatch({
+				type: 'FETCH_MIDDLEWARE',
+				payload: {
+					actions,
+					url,
+					method,
           data,
-          method,
-          options
-        }
-      })
-    );
-  }
-};
+          headers,
+					options
+				}
+			})
+		)
+	}
+}

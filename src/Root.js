@@ -10,7 +10,9 @@ import {
 }                           from 'react-router-dom';
 import Login                from './views/Login/Login';
 import LogoutRoute              from './components/logoutRoute/LogoutRoute'
-import 'bootstrap/dist/css/bootstrap.css';
+import ReduxSweetAlert from 'react-redux-sweetalert'
+import NotificationsSystem from 'reapop'
+import theme from 'reapop-theme-wybo'
 
 const store = configStore();
 
@@ -26,6 +28,8 @@ class Root extends Component {
               <App />
             </Switch>
           </ConnectedRouter>
+          <ReduxSweetAlert />
+					<NotificationsSystem theme={theme} />
         </div>
       </Provider>
     );

@@ -1,21 +1,15 @@
 import { appConfig } from '../../config'
 import { api } from '../../services/api'
-
-// Reducer
-const REQUEST_PHOTO_FETCH  = 'REQUEST_PHOTO_FETCH';
-const RECEIVED_PHOTO_FETCH = 'RECEIVED_PHOTO_FETCH';
-const ERROR_PHOTO_FETCH    = 'ERROR_PHOTO_FETCH';
-
-const actionTypes = {
-  request:  REQUEST_PHOTO_FETCH,
-  success:  RECEIVED_PHOTO_FETCH,
-  fail:     ERROR_PHOTO_FETCH
-}
+import { 
+  REQUEST_PHOTO_FETCH,
+  RECEIVED_PHOTO_FETCH,
+  ERROR_PHOTO_FETCH
+} from '../../config/constant'
 
 const initialState = {
   data: [],
   error: {},
-  isFetching: false
+  isLoading: false
 }
 
 export default function (state = initialState, action) {
@@ -23,12 +17,12 @@ export default function (state = initialState, action) {
     case REQUEST_PHOTO_FETCH:
       return {
         ...state,
-        isFetching: true
+        isLoading: true
       }
     case RECEIVED_PHOTO_FETCH:
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         data: action.payload.data
       }
       
@@ -47,5 +41,12 @@ export default function (state = initialState, action) {
 export function getPhotoList() {
   const method = 'GET'
   const path = appConfig.api.photos
+
+  const actionTypes = {
+    request:  REQUEST_PHOTO_FETCH,
+    success:  RECEIVED_PHOTO_FETCH,
+    fail:     ERROR_PHOTO_FETCH
+  }
+
   return api(method, path, {}, actionTypes)
 }

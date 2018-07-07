@@ -1,39 +1,30 @@
 import React, {
   Component
 }                         from 'react';
-import PropTypes          from 'prop-types';
 import {
   Route,
   Redirect,
   withRouter
 }                         from "react-router-dom";
-import auth               from '../../services/auth';
+import { connect } from 'react-redux'
+import { bindActionCreators, compose } from 'redux';
 
 class PrivateRoute extends Component {
-  static propTypes = {
-    match:    PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history:  PropTypes.object.isRequired,
-
-    component:  PropTypes.any.isRequired,
-    path:       PropTypes.string
-  };
-
+  
   render() {
     const {
+      isAuthenticated,
       component: InnerComponent,
       ...rest
     } = this.props;
     const { location } = this.props;
-    
-    const isUserAuthenticated = this.isAuthenticated();
-    const isTokenExpired      = this.isExpired();
+
     return (
       <Route
         {...rest}
         render={
           props => (
-            !isTokenExpired && isUserAuthenticated
+            isAuthenticated
               ? <InnerComponent {...props} />
               : <Redirect to={{ pathname: '/login', state: { from: location } }} />
           )
@@ -41,17 +32,24 @@ class PrivateRoute extends Component {
       />
     );
   }
+}
 
-  isAuthenticated() {
-    const dec = auth.decodeToken()
-    const userId = dec !== undefined ? dec.data.adminId : false || false;
-    const isAuthenticated = auth.getToken() && userId ? true : false;
-    return isAuthenticated;
-  }
 
-  isExpired() {
-    return auth.isExpiredToken(auth.getToken());
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.userAuth.isAuthenticated
   }
 }
 
-export default withRouter(PrivateRoute);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+    },
+    dispatch
+  )
+}
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(PrivateRoute)
